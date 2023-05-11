@@ -7,7 +7,7 @@
 <body>
 <a href="/"> Last Page </a><br>
 <form action="/appointments/add" method="post">
-  <input type="datetime-local" name="datetime"><br>
+  <input type="datetime" name="datetime" placeholder="2014-02-06 10:00"><br>
   <select name="patient.id">
     <option th:each="patient : ${patients}" th:text="${patient.name}" th:value="${patient.id}"></option>
   </select><br>

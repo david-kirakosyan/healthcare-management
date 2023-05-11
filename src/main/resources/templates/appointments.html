@@ -17,7 +17,7 @@
   </tr>
   <tr th:each="appointment : ${appointments}">
     <th th:text="${appointment.id}"></th>
-    <th th:text="${appointment.datetime}"></th>
+    <th th:text="${#dates.format(appointment.getDatetime, 'dd/MM/yyyy HH:mm')}"></th>
     <th th:text="${appointment.patient.name}"></th>
     <th th:text="${appointment.doctor.name}"></th>
     <td><a th:href="@{/appointments/delete(id=${appointment.id})}">Delete</a></td>
