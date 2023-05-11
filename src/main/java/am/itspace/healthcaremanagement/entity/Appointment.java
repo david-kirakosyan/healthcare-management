@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -20,7 +21,7 @@ public class Appointment {
     private int id;
     @Column(name = "date_time")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date datetime;
+    private LocalDateTime datetime;
     @ManyToOne
     private Patient patient;
     @ManyToOne

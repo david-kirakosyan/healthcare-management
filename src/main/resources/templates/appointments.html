@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Patient</title>
@@ -8,20 +8,20 @@
 <a href="/"> Last Page </a><br>
 <a href="/appointments/add"> Create Patient</a>
 <table border="1px">
-  <tr>
-    <td>Id</td>
-    <td>Datetime</td>
-    <td>Patient Name</td>
-    <td>Doctor Name</td>
-    <td>Action</td>
-  </tr>
-  <tr th:each="appointment : ${appointments}">
-    <th th:text="${appointment.id}"></th>
-    <th th:text="${#dates.format(appointment.getDatetime, 'dd/MM/yyyy HH:mm')}"></th>
-    <th th:text="${appointment.patient.name}"></th>
-    <th th:text="${appointment.doctor.name}"></th>
-    <td><a th:href="@{/appointments/delete(id=${appointment.id})}">Delete</a></td>
-  </tr>
+    <tr>
+        <td>Id</td>
+        <td>Datetime</td>
+        <td>Patient Name</td>
+        <td>Doctor Name</td>
+        <td>Action</td>
+    </tr>
+    <tr th:each="appointment : ${appointments}">
+        <th th:text="${appointment.id}"></th>
+        <td th:text="${#temporals.format(appointment.datetime, 'dd-MM-yyyy HH:mm')}"></td>
+        <th th:text="${appointment.patient.name}"></th>
+        <th th:text="${appointment.doctor.name}"></th>
+        <td><a th:href="@{/appointments/delete(id=${appointment.id})}">Delete</a></td>
+    </tr>
 </table>
 </body>
 </html>

@@ -43,7 +43,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/appointments/add")
-    public String addAppointment(@ModelAttribute Appointment appointment) {
+    public String addAppointment(@ModelAttribute Appointment appointment){
         appointmentRepository.save(appointment);
         return "redirect:/appointments";
     }
