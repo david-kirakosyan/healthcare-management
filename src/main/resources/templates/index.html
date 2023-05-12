@@ -1,12 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
-<body>
-<a href="/doctors"> Doctor Page </a><br>
-<a href="/patients"> Patient Page </a><br>
-<a href="/appointments"> Appointment Page </a><br>
-</body>
+<!doctype html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Hospital</title>
+        <link rel="shortcut icon" href="/assets/images/fav.png" type="image/x-icon">
+        <link href="/https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="/assets/images/fav.jpg">
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="/assets/plugins/testimonial/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="/assets/plugins/testimonial/css/owl.theme.min.css">
+        <link rel="stylesheet" href="/assets/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+    </head>
+    <body>
+         <header>
+             <div class="container-fluid header">
+                 <div class="logo-row">
+                    <div class="container">
+                        <div class="row lorow">
+                            <div class="col-md-6 logo-col">
+                                 <img src="/assets/images/logo.jpg" alt="">
+                                   <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                     <i class="fas fa-bars"></i>
+                                    </button>
+                             </div>
+                             <div class="col-md-6 d-none d-lg-block cno-coll">
+                                 <p><i class="fas fa-mobile-alt"></i> Call Us: 1-3030-123-4546</p>
+                             </div>
+                        </div>
+                    </div>
+                     
+                 </div>
+                 <div id="menu-jk" class="nav-row">
+                     <div class="container">
+                         <div class="row navrow">
+                             <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                 
+                                    
+                                  
+                                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                      <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                          <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a class="nav-link" href="/doctors">Doctor</a>
+                                        </li>
+                                         <li class="nav-item">
+                                          <a class="nav-link" href="/patients">Patient</a>
+                                        </li>
+                                         <li class="nav-item">
+                                          <a class="nav-link" href="/appointments">Appointments</a>
+                                        </li>
+                                          <li class="nav-item">
+                                              <a class="nav-link active" href="/appointments/add">Contact Appointments</a>
+                                          </li>
+                                        
+                                      </ul>
+                                    </div>
+                                 
+                                </nav>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </header>
+
+<!--    Slider Starts Here   -->
+
+<div class="slider container-fluid">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/assets/images/s3.jpg" class="d-block w-100" alt="...">
+           <div class="carousel-caption d-none d-md-block">
+            <h3 class="animate__animated animate__backInLeft">Care with Most Advanced Technology</h3>
+            <p class="animate__animated animate__backInRight">Some representative placeholder content for the first slide. The implant fixture is first placed, so that it is likely to osseointegrate</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="/assets/images/s2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            <h3 class="animate__animated animate__backInLeft">Care with Most Advanced Technology</h3>
+            <p class="animate__animated animate__backInRight">Some representative placeholder content for the first slide. The implant fixture is first placed, so that it is likely to osseointegrate</p>
+          </div>
+        </div>
+
+      </div><a href="/about.html" title="about"></a>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+</div>
+    </body>
+
+<script src="/assets/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+<script src="/assets/plugins/testimonial/js/owl.carousel.min.js"></script>
+<script src="/assets/js/script.js"></script>
+
 </html>

@@ -27,7 +27,7 @@ public class PatientController {
 
     @GetMapping("/patients/add")
     public String addPatientPage() {
-        return "addPatient";
+        return "patients";
     }
 
     @PostMapping("/patients/add")

@@ -1,27 +1,119 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Patient</title>
-</head>
-<body>
-<a href="/"> Last Page </a><br>
-<a href="/appointments/add"> Create Patient</a>
-<table border="1px">
-    <tr>
-        <td>Id</td>
-        <td>Datetime</td>
-        <td>Patient Name</td>
-        <td>Doctor Name</td>
-        <td>Action</td>
-    </tr>
-    <tr th:each="appointment : ${appointments}">
-        <th th:text="${appointment.id}"></th>
-        <td th:text="${#temporals.format(appointment.datetime, 'dd-MM-yyyy HH:mm')}"></td>
-        <th th:text="${appointment.patient.name}"></th>
-        <th th:text="${appointment.doctor.name}"></th>
-        <td><a th:href="@{/appointments/delete(id=${appointment.id})}">Delete</a></td>
-    </tr>
-</table>
-</body>
+<!doctype html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Appointments</title>
+        <link rel="shortcut icon" href="/assets/images/fav.png" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="/assets/images/fav.jpg">
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="/assets/plugins/testimonial/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="/assets/plugins/testimonial/css/owl.theme.min.css">
+        <link rel="stylesheet" href="/assets/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+    </head>
+    <body>
+         <header>
+             <div class="container-fluid header">
+                 <div class="logo-row">
+                    <div class="container">
+                        <div class="row lorow">
+                            <div class="col-md-6 logo-col">
+                                 <img src="/assets/images/logo.jpg" alt="">
+                                   <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                     <i class="fas fa-bars"></i>
+                                    </button>
+                             </div>
+                             <div class="col-md-6 d-none d-lg-block cno-coll">
+                                 <p><i class="fas fa-mobile-alt"></i> Call Us: 1-3030-123-4546</p>
+                             </div>
+                        </div>
+                    </div>
+
+                 </div>
+                 <div id="menu-jk" class="nav-row">
+                     <div class="container">
+                         <div class="row navrow">
+                             <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+
+                                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                     <ul class="navbar-nav">
+                                         <li class="nav-item">
+                                             <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" href="/doctors">Doctor</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" href="/patients">Patient</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" href="/appointments">Appointments</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link active" href="/appointments/add">Contact Appointments</a>
+                                         </li>
+
+                                     </ul>
+                                 </div>
+
+                                </nav>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </header>
+
+<!--  ************************* Page Title Starts Here ************************** -->
+<div class="page-nav no-margin row">
+    <div class="container">
+        <div class="row">
+            <h2>Appointments</h2>
+            <ul>
+                <li> <a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><i class="fas fa-angle-double-right"></i> Appointments</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ################# Our Team Starts Here#######################--->
+    <section class="our-team" >
+        <div class="container">
+            <div class="section-title row">
+                <h2>Appointments</h2>
+
+            </div>
+            <div class="row team-row" >
+                <div class="col-md-3 col-sm-6" th:each="appointment : ${appointments}">
+                    <div class="single-usr" >
+                        <div class="det-o" >
+                           Datetime: <i th:text="${#temporals.format(appointment.datetime, 'dd-MM-yyyy HH:mm')}"></i><br>
+                            <h6>Patient</h6>
+                            <i th:text="${appointment.patient.name}"></i>
+                            <i th:text="${appointment.patient.surname}"></i><br>
+                            <h6>Doctor</h6>
+                            <i th:text="${appointment.doctor.name}"></i>
+                            <i th:text="${appointment.doctor.surname}"></i><br>
+                            <a th:href="@{/appointments/delete(id=${appointment.id})}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+
+<script src="/assets/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+<script src="/assets/plugins/testimonial/js/owl.carousel.min.js"></script>
+<script src="/assets/js/script.js"></script>
+
 </html>
