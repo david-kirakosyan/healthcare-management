@@ -92,7 +92,7 @@
             <div class="row team-row" >
                 <div class="col-md-3 col-sm-6" th:each="doctor : ${doctors}">
                     <div class="single-usr" >
-                        <img th:if="${doctor.getProfilePic() != null}" th:src="@{/getImage(profilePic=${doctor.getProfilePic()})}" alt="">
+                        <img th:if="${doctor.profilePic != null}" th:src="@{/getImage(profilePic=${doctor.profilePic})}" alt="">
                         <div class="det-o" >
                             <h4 th:text="${doctor.name}"></h4>
                             <h4 th:text="${doctor.surname}"></h4>
