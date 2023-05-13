@@ -96,11 +96,11 @@
                            Datetime: <i th:text="${#temporals.format(appointment.datetime, 'dd-MM-yyyy HH:mm')}"></i><br>
                             <h6>Patient</h6>
                             <i th:text="${appointment.patient.name}"></i>
-                            <i th:text="${appointment.patient.surname}"></i><br>
+                            <i th:text="${appointment.patient.surname}"></i><br><br>
                             <h6>Doctor</h6>
                             <i th:text="${appointment.doctor.name}"></i>
-                            <i th:text="${appointment.doctor.surname}"></i><br>
-                            <a th:href="@{/appointments/delete(id=${appointment.id})}">Delete</a>
+                            <i th:text="${appointment.doctor.surname}"></i><br><br>
+                            <a th:href="@{/appointments/delete(id=${appointment.id})}" style="color: red">Delete</a>
                         </div>
                     </div>
                 </div>

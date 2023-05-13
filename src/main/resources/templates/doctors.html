@@ -99,7 +99,7 @@
                             <i th:text="${doctor.email}"></i><br>
                             <i th:text="${doctor.specialty.name()}"></i><br>
                             tel: <i th:text="${doctor.phoneNumber}"></i><br>
-                            <a th:href="@{/doctors/delete(id=${doctor.id})}">Delete</a>
+                            <a th:href="@{/doctors/delete(id=${doctor.id})}" style="color: red">Delete</a>
                         </div>
                     </div>
                 </div>

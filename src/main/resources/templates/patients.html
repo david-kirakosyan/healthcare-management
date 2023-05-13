@@ -96,7 +96,7 @@
                             <h4 th:text="${patient.name}"></h4>
                             <h4 th:text="${patient.surname}"></h4>
                             Birthday:  <i th:text="${#dates.format(patient.dateOfBirthday, 'dd/MM/yyyy')}"></i><br>
-                            <a th:href="@{/patients/delete(id=${patient.id})}">Delete</a>
+                            <a th:href="@{/patients/delete(id=${patient.id})}" style="color: red">Delete</a>
                         </div>
                     </div>
                 </div>
