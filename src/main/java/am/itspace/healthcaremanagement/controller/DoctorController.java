@@ -47,16 +47,6 @@ public class DoctorController {
         return "redirect:/doctors";
     }
 
-//    private String images(@RequestParam("image") MultipartFile multipartFile) throws IOException {
-//        if (multipartFile != null && !multipartFile.isEmpty()) {
-//            String fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
-//            File file = new File(doctorImageUploadPath + fileName);
-//            multipartFile.transferTo(file);
-//            return fileName;
-//        }
-//        return null;
-//    }
-
     @GetMapping("/doctors/delete")
     public String deleteDoctor(@RequestParam("id") int id) {
         doctorRepository.deleteById(id);
