@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface DoctorService {
-    List<Doctor> allDoctor();
+    List<Doctor> allDoctors();
 
     void addDoctor(Doctor doctor, MultipartFile multipartFile) throws IOException;
 

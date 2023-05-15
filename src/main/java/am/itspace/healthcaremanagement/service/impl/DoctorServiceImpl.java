@@ -22,7 +22,7 @@ public class DoctorServiceImpl implements DoctorService {
     private String doctorImageUploadPath;
 
     @Override
-    public List<Doctor> allDoctor(){
+    public List<Doctor> allDoctors(){
         return doctorRepository.findAll();
     }
 

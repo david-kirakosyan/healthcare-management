@@ -3,10 +3,10 @@ package am.itspace.healthcaremanagement.controller;
 import am.itspace.healthcaremanagement.entity.Appointment;
 import am.itspace.healthcaremanagement.entity.Doctor;
 import am.itspace.healthcaremanagement.entity.Patient;
-import am.itspace.healthcaremanagement.repository.AppointmentRepository;
-import am.itspace.healthcaremanagement.repository.DoctorRepository;
-import am.itspace.healthcaremanagement.repository.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import am.itspace.healthcaremanagement.service.AppointmentService;
+import am.itspace.healthcaremanagement.service.DoctorService;
+import am.itspace.healthcaremanagement.service.PatientService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,40 +17,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class AppointmentController {
 
-    @Autowired
-    private DoctorRepository doctorRepository;
-    @Autowired
-    private PatientRepository patientRepository;
-    @Autowired
-    private AppointmentRepository appointmentRepository;
+    private final AppointmentService APPOINTMENT_SERVICE;
+    private final DoctorService DOCTOR_SERVICE;
+    private final PatientService PATIENT_SERVICE;
+
 
     @GetMapping("/appointments")
     public String appointmentPage(ModelMap modelMap) {
-        List<Appointment> appointments = appointmentRepository.findAll();
+        List<Appointment> appointments = APPOINTMENT_SERVICE.allAppointments();
         modelMap.addAttribute("appointments", appointments);
         return "appointments";
     }
 
     @GetMapping("/appointments/add")
     public String addAppointmentPage(ModelMap modelMap) {
-        List<Patient> patients = patientRepository.findAll();
-        List<Doctor> doctors = doctorRepository.findAll();
+        List<Patient> patients = PATIENT_SERVICE.allPatients();
+        List<Doctor> doctors = DOCTOR_SERVICE.allDoctors();
         modelMap.addAttribute("patients", patients);
         modelMap.addAttribute("doctors", doctors);
         return "addAppointment";
     }
 
     @PostMapping("/appointments/add")
-    public String addAppointment(@ModelAttribute Appointment appointment){
-        appointmentRepository.save(appointment);
+    public String addAppointment(@ModelAttribute Appointment appointment) {
+        APPOINTMENT_SERVICE.addAppointment(appointment);
         return "redirect:/appointments";
     }
 
     @GetMapping("/appointments/delete")
     public String deleteAppointments(@RequestParam("id") int id) {
-        appointmentRepository.deleteById(id);
+        APPOINTMENT_SERVICE.deleteAppointment(id);
         return "redirect:/appointments";
     }
 }

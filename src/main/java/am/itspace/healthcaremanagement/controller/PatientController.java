@@ -1,8 +1,8 @@
 package am.itspace.healthcaremanagement.controller;
 
 import am.itspace.healthcaremanagement.entity.Patient;
-import am.itspace.healthcaremanagement.repository.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import am.itspace.healthcaremanagement.service.PatientService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class PatientController {
 
-    @Autowired
-    private PatientRepository patientRepository;
+    private final PatientService PATIENT_SERVICE;
 
     @GetMapping("/patients")
     public String patientPage(ModelMap modelMap) {
-        List<Patient> patients = patientRepository.findAll();
+        List<Patient> patients = PATIENT_SERVICE.allPatients();
         modelMap.addAttribute("patients", patients);
         return "patients";
     }
@@ -31,14 +31,14 @@ public class PatientController {
     }
 
     @PostMapping("/patients/add")
-    public String addPatient(@ModelAttribute Patient patient){
-        patientRepository.save(patient);
+    public String addPatient(@ModelAttribute Patient patient) {
+        PATIENT_SERVICE.addPatient(patient);
         return "redirect:/patients";
     }
 
     @GetMapping("/patients/delete")
     public String deletePatent(@RequestParam("id") int id) {
-        patientRepository.deleteById(id);
+        PATIENT_SERVICE.deletePatient(id);
         return "redirect:/patients";
     }
 }
