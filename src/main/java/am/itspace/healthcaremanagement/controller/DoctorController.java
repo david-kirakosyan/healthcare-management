@@ -1,10 +1,8 @@
 package am.itspace.healthcaremanagement.controller;
 
 import am.itspace.healthcaremanagement.entity.Doctor;
-import am.itspace.healthcaremanagement.repository.DoctorRepository;
-import am.itspace.healthcaremanagement.util.ImageUtil;
+import am.itspace.healthcaremanagement.service.impl.DoctorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,17 +18,12 @@ import java.util.List;
 public class DoctorController {
 
     @Autowired
-    private DoctorRepository doctorRepository;
-
-
-    @Value("${healthcare_management.doctor.upload.image.path}")
-    private String doctorImageUploadPath;
-
+    private DoctorServiceImpl doctorService = new DoctorServiceImpl();
 
     @GetMapping("/doctors")
     public String doctorPage(ModelMap modelMap) {
-        List<Doctor> doctors = doctorRepository.findAll();
-        modelMap.addAttribute("doctors", doctors);
+        List<Doctor> doctors = doctorService.allDoctor();
+        modelMap.addAttribute("doctors",doctors);
         return "doctors";
     }
 
@@ -41,15 +34,13 @@ public class DoctorController {
 
     @PostMapping("/doctors/add")
     public String addDoctor(@ModelAttribute Doctor doctor, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        String images = ImageUtil.uploadImage(multipartFile, doctorImageUploadPath);
-        doctor.setProfilePic(images);
-        doctorRepository.save(doctor);
+        doctorService.addDoctor(doctor,multipartFile);
         return "redirect:/doctors";
     }
 
     @GetMapping("/doctors/delete")
     public String deleteDoctor(@RequestParam("id") int id) {
-        doctorRepository.deleteById(id);
+        doctorService.deleteDoctor(id);
         return "redirect:/doctors";
     }
 }
