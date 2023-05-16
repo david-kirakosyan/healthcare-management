@@ -22,19 +22,22 @@ public class DoctorServiceImpl implements DoctorService {
     private String doctorImageUploadPath;
 
     @Override
-    public List<Doctor> allDoctors(){
+    public List<Doctor> allDoctors() {
         return doctorRepository.findAll();
     }
 
     @Override
-    public void addDoctor(Doctor doctor, MultipartFile multipartFile) throws IOException {
-        String images = ImageUtil.uploadImage(multipartFile, doctorImageUploadPath);
-        doctor.setProfilePic(images);
+    public void addDoctor(Doctor doctor, MultipartFile multipartFile) {
+        try {
+            String images = ImageUtil.uploadImage(multipartFile, doctorImageUploadPath);
+            doctor.setProfilePic(images);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         doctorRepository.save(doctor);
     }
-
     @Override
-    public void deleteDoctor(int id){
+    public void deleteDoctor(int id) {
         doctorRepository.deleteById(id);
     }
 }
