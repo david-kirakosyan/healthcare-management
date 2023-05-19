@@ -57,8 +57,7 @@
                                     <a class="nav-link " href="/patients" th:if="${user != null}">Patient</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " href="/appointments"
-                                       th:if="${user.userType == user.userType.ADMIN}">Appointments</a>
+                                    <a class="nav-link " href="/appointments" th:if="${user != null}">Appointments</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" href="/appointments/add" th:if="${user != null}"> Queue
@@ -100,19 +99,14 @@
         <div class="row">
             <div style="padding:20px" class="col-sm-7">
                 <h2>Add Appointment</h2> <br>
-                <form action="/appointments/add" method="post" th:if="${user.userType == user.userType.USER}">
+                <form action="/appointments/add" method="post">
                     <div class="row cont-row">
                         <div class="col-sm-3"><label>Enter Datetime </label><span>:</span></div>
                         <div class="col-sm-8"><input type="datetime-local" name="datetime"
                                                      class="form-control input-sm"></div>
                     </div>
-                    <div class="row cont-row">
-                        <div class="col-sm-3"><label>Enter Patient </label><span>:</span></div>
-                        <select class="col-sm-8" name="patient.id">
-                            <option th:each="patient : ${patients}" th:text="${patient.user.name}"
-                                    th:value="${patient.id}"></option>
-                        </select>
-                    </div>
+                    <input type="hidden" name="patient.id" th:each="patient : ${patients}" th:if="${patient.user.name == user.name}"
+                           th:text="${patient.user.name}" th:value="${patient.id}">
                     <br>
                     <div class="row cont-row">
                         <div class="col-sm-3"><label>Enter Doctor </label><span>:</span></div>

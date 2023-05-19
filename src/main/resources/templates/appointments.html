@@ -111,7 +111,7 @@
                             <h6>Doctor</h6>
                             <i th:text="${appointment.doctor.user.name}"></i>
                             <i th:text="${appointment.doctor.user.surname}"></i><br><br>
-                            <a th:if="${appointment.doctor.user.userType.ADMIN == appointment.doctor.user.userType}"
+                            <a th:if="${user.userType == user.userType.ADMIN}"
                                th:href="@{/appointments/delete(id=${appointment.id})}" style="color: red">Delete</a>
                         </div>
                     </div>
