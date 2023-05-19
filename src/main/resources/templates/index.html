@@ -30,6 +30,9 @@
                              <div class="col-md-6 d-none d-lg-block cno-coll">
                                  <p><i class="fas fa-mobile-alt"></i> Call Us: 0312-3-00-03</p>
                              </div>
+                             <div class="col-md-6 d-none d-lg-block cno-coll" th:if="${user != null}">
+                                 <p><i th:text="${user.name}"></i> <i  th:text="${user.surname}"></i></p>
+                             </div>
                         </div>
                     </div>
                      
@@ -50,15 +53,24 @@
                                           <a class="nav-link" href="/doctors">Doctor</a>
                                         </li>
                                          <li class="nav-item">
-                                          <a class="nav-link" href="/patients">Patient</a>
+                                          <a class="nav-link" href="/patients" th:if="${user != null}">Patient</a>
                                         </li>
                                          <li class="nav-item">
-                                          <a class="nav-link" href="/appointments">Appointments</a>
+                                          <a class="nav-link" href="/appointments" th:if="${user.userType == user.userType.ADMIN}">Appointments</a>
                                         </li>
                                           <li class="nav-item">
-                                              <a class="nav-link" href="/appointments/add">Queue Up Appointments</a>
+                                              <a class="nav-link" href="/appointments/add" th:if="${user != null}">Queue Up Appointments</a>
                                           </li>
-                                        
+                                          <li class="nav-item">
+                                              <a class="nav-link" href="/user/register" th:if="${user == null}">Register</a>
+                                          </li>
+                                          <li class="nav-item">
+                                              <a class="nav-link" href="/login" th:if="${user == null}">Login</a>
+                                          </li>
+                                          <li class="nav-item" th:if="${user != null}">
+                                              <a class="nav-link" href="/logout"> Logout </a>
+                                          </li>
+
                                       </ul>
                                     </div>
                                  

@@ -16,12 +16,10 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-    private String name;
-    private String surname;
-    private String email;
     @Enumerated(EnumType.STRING)
     private SpecialtyType specialty;
     private String phoneNumber;
     private String profilePic;
-
+    @ManyToOne
+    private User user;
 }
