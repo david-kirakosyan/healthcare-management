@@ -56,7 +56,7 @@
                                              <a class="nav-link" href="/patients" th:if="${user != null}">Patient</a>
                                          </li>
                                          <li class="nav-item">
-                                             <a class="nav-link" href="/appointments" th:if="${user.userType == user.userType.ADMIN}">Appointments</a>
+                                             <a class="nav-link" href="/appointments" th:if="${user == null}">Appointments</a>
                                          </li>
                                          <li class="nav-item">
                                              <a class="nav-link" href="/appointments/add" th:if="${user != null}">Queue Up Appointments</a>

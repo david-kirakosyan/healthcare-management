@@ -29,8 +29,8 @@ public class AppointmentController {
 
     @GetMapping("/appointments")
     public String appointmentPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null){
-            modelMap.addAttribute("user",currentUser.getUser());
+        if (currentUser != null) {
+            modelMap.addAttribute("user", currentUser.getUser());
         }
         List<Appointment> appointments = APPOINTMENT_SERVICE.allAppointments();
         modelMap.addAttribute("appointments", appointments);
@@ -39,8 +39,8 @@ public class AppointmentController {
 
     @GetMapping("/appointments/add")
     public String addAppointmentPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null){
-            modelMap.addAttribute("user",currentUser.getUser());
+        if (currentUser != null) {
+            modelMap.addAttribute("user", currentUser.getUser());
         }
         List<Patient> patients = PATIENT_SERVICE.allPatients();
         List<Doctor> doctors = DOCTOR_SERVICE.allDoctors();

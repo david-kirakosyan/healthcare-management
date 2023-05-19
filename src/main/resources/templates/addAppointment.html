@@ -100,7 +100,7 @@
         <div class="row">
             <div style="padding:20px" class="col-sm-7">
                 <h2>Add Appointment</h2> <br>
-                <form action="/appointments/add" method="post" th:if="${user != null}">
+                <form action="/appointments/add" method="post" th:if="${user.userType == user.userType.USER}">
                     <div class="row cont-row">
                         <div class="col-sm-3"><label>Enter Datetime </label><span>:</span></div>
                         <div class="col-sm-8"><input type="datetime-local" name="datetime"
