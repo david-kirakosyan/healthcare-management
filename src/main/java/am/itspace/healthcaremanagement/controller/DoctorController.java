@@ -21,8 +21,8 @@ public class DoctorController {
 
     @GetMapping
     public String doctorPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null){
-            modelMap.addAttribute("user",currentUser.getUser());
+        if (currentUser != null) {
+            modelMap.addAttribute("user", currentUser.getUser());
         }
         List<Doctor> doctors = DOCTOR_SERVICE.allDoctors();
         modelMap.addAttribute("doctors", doctors);
@@ -38,13 +38,17 @@ public class DoctorController {
     public String addDoctor(@ModelAttribute Doctor doctor,
                             @RequestParam("image") MultipartFile multipartFile,
                             @AuthenticationPrincipal CurrentUser currentUser) {
-        DOCTOR_SERVICE.addDoctor(doctor, multipartFile, currentUser);
+        if (currentUser.getUser().getUserType().name().equals("ADMIN")){
+            DOCTOR_SERVICE.addDoctor(doctor, multipartFile, currentUser);
+        }
         return "redirect:/doctors";
     }
 
     @GetMapping("/delete")
-    public String deleteDoctor(@RequestParam("id") int id) {
-        DOCTOR_SERVICE.deleteDoctor(id);
+    public String deleteDoctor(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getUser().getUserType().name().equals("ADMIN")){
+            DOCTOR_SERVICE.deleteDoctor(id);
+        }
         return "redirect:/doctors";
     }
 }

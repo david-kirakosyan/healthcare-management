@@ -56,7 +56,7 @@
                                              <a class="nav-link " href="/patients" th:if="${user != null}">Patient</a>
                                          </li>
                                          <li class="nav-item">
-                                             <a class="nav-link active" href="/appointments" th:if="${user.userType == user.userType.ADMIN}">Appointments</a>
+                                             <a class="nav-link active" href="/appointments" th:if="${user != null}">Appointments</a>
                                          </li>
                                          <li class="nav-item">
                                              <a class="nav-link " href="/appointments/add" th:if="${user != null}">Queue Up Appointments</a>
@@ -101,8 +101,7 @@
 
             </div>
             <div class="row team-row" >
-                <div class="col-md-3 col-sm-6" th:each="appointment : ${appointments}"
-                     th:if="${user.userType == user.userType.ADMIN}">
+                <div class="col-md-3 col-sm-6" th:each="appointment : ${appointments}">
                     <div class="single-usr" >
                         <div class="det-o" >
                            Datetime: <i th:text="${#temporals.format(appointment.datetime, 'dd-MM-yyyy HH:mm')}"></i><br>
@@ -112,7 +111,8 @@
                             <h6>Doctor</h6>
                             <i th:text="${appointment.doctor.user.name}"></i>
                             <i th:text="${appointment.doctor.user.surname}"></i><br><br>
-                            <a  th:href="@{/appointments/delete(id=${appointment.id})}" style="color: red">Delete</a>
+                            <a th:if="${appointment.doctor.user.userType.ADMIN == appointment.doctor.user.userType}"
+                               th:href="@{/appointments/delete(id=${appointment.id})}" style="color: red">Delete</a>
                         </div>
                     </div>
                 </div>

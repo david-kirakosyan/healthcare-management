@@ -22,8 +22,8 @@ public class PatientController {
 
     @GetMapping("/patients")
     public String patientPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null){
-            modelMap.addAttribute("user",currentUser.getUser());
+        if (currentUser != null) {
+            modelMap.addAttribute("user", currentUser.getUser());
         }
         List<Patient> patients = PATIENT_SERVICE.allPatients();
         modelMap.addAttribute("patients", patients);
@@ -38,13 +38,17 @@ public class PatientController {
     @PostMapping("/patients/add")
     public String addPatient(@ModelAttribute Patient patient,
                              @AuthenticationPrincipal CurrentUser currentUser) {
-        PATIENT_SERVICE.addPatient(patient, currentUser);
+        if (currentUser.getUser().getUserType().name().equals("USER")){
+            PATIENT_SERVICE.addPatient(patient, currentUser);
+        }
         return "redirect:/patients";
     }
 
     @GetMapping("/patients/delete")
-    public String deletePatent(@RequestParam("id") int id) {
-        PATIENT_SERVICE.deletePatient(id);
+    public String deletePatent(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getUser().getUserType().name().equals("ADMIN")){
+            PATIENT_SERVICE.deletePatient(id);
+        }
         return "redirect:/patients";
     }
 }

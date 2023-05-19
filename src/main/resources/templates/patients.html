@@ -108,14 +108,14 @@
                             <h4 th:text="${patient.user.surname}"></h4>
                             <i th:text="${patient.user.email}"></i><br>
                             Birthday:  <i th:text="${#dates.format(patient.dateOfBirthday, 'dd/MM/yyyy')}"></i><br>
-                            <a th:if="${user.userType == user.userType.ADMIN}" th:href="@{/patients/delete(id=${patient.id})}" style="color: red">Delete</a>
+                            <a th:href="@{/patients/delete(id=${patient.id})}" style="color: red">Delete</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-         <div class="row contact-rooo no-margin" th:if="${user.name != null}">
+         <div class="row contact-rooo no-margin" th:if="${user.userType.ADMIN != null}">
              <div class="container">
                  <div class="row">
                      <div style="padding:20px" class="col-sm-7">

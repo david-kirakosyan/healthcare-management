@@ -50,14 +50,18 @@ public class AppointmentController {
     }
 
     @PostMapping("/appointments/add")
-    public String addAppointment(@ModelAttribute Appointment appointment) {
-        APPOINTMENT_SERVICE.addAppointment(appointment);
+    public String addAppointment(@ModelAttribute Appointment appointment, @AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getUser().getUserType().name().equals("USER")){
+            APPOINTMENT_SERVICE.addAppointment(appointment);
+        }
         return "redirect:/appointments";
     }
 
     @GetMapping("/appointments/delete")
-    public String deleteAppointments(@RequestParam("id") int id) {
-        APPOINTMENT_SERVICE.deleteAppointment(id);
+    public String deleteAppointments(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getUser().getUserType().name().equals("ADMIN")){
+            APPOINTMENT_SERVICE.deleteAppointment(id);
+        }
         return "redirect:/appointments";
     }
 }

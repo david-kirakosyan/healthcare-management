@@ -56,7 +56,7 @@
                                              <a class="nav-link" href="/patients" th:if="${user != null}">Patient</a>
                                          </li>
                                          <li class="nav-item">
-                                             <a class="nav-link" href="/appointments" th:if="${user == null}">Appointments</a>
+                                             <a class="nav-link" href="/appointments" th:if="${user != null}">Appointments</a>
                                          </li>
                                          <li class="nav-item">
                                              <a class="nav-link" href="/appointments/add" th:if="${user != null}">Queue Up Appointments</a>
@@ -110,14 +110,15 @@
                             <i th:text="${doctor.user.email}"></i><br>
                             <i th:text="${doctor.specialty.name()}"></i><br>
                             tel: <i th:text="${doctor.phoneNumber}"></i><br>
-                            <a th:if="${user.userType == user.userType.ADMIN}" th:href="@{/doctors/delete(id=${doctor.id})}" style="color: red">Delete</a>
+                            <a th:if="${doctor.user.userType == doctor.user.userType.ADMIN && user != null}"
+                               th:href="@{/doctors/delete(id=${doctor.id})}" style="color: red">Delete</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-         <div class="row contact-rooo no-margin" th:if="${user.userType == user.userType.ADMIN}">
+         <div class="row contact-rooo no-margin"  th:if="${user != null}">
              <div class="container">
                  <div class="row">
                      <div style="padding:20px" class="col-sm-7">
