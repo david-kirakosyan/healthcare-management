@@ -108,7 +108,11 @@
                             <h4 th:text="${patient.user.surname}"></h4>
                             <i th:text="${patient.user.email}"></i><br>
                             Birthday:  <i th:text="${#dates.format(patient.dateOfBirthday, 'dd/MM/yyyy')}"></i><br>
-                            <a th:if="${user.userType == user.userType.ADMIN}" th:href="@{/patients/delete(id=${patient.id})}" style="color: red">Delete</a>
+                            <i th:if="${user != null}">
+                            <a th:if="${patient.user.name == user.name || user.userType == user.userType.ADMIN}"
+                               th:href="@{/patients/delete(id=${patient.id})}" style="color: red">Delete</a>
+                        </i><br>
+
                         </div>
                     </div>
                 </div>
