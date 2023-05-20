@@ -38,15 +38,13 @@ public class PatientController {
     @PostMapping("/patients/add")
     public String addPatient(@ModelAttribute Patient patient,
                              @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser.getUser().getUserType().name().equals("USER")){
-            PATIENT_SERVICE.addPatient(patient, currentUser);
-        }
+        PATIENT_SERVICE.addPatient(patient, currentUser);
         return "redirect:/patients";
     }
 
     @GetMapping("/patients/delete")
     public String deletePatent(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser.getUser().getUserType().name().equals("ADMIN")){
+        if (currentUser.getUser().getUserType().name().equals("ADMIN")) {
             PATIENT_SERVICE.deletePatient(id);
         }
         return "redirect:/patients";

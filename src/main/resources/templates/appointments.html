@@ -102,8 +102,8 @@
             </div>
             <div class="row team-row" >
                 <div class="col-md-3 col-sm-6" th:each="appointment : ${appointments}">
-                    <div class="single-usr" >
-                        <div class="det-o" >
+                    <div class="single-usr" th:if="${user.userType == user.userType.ADMIN || appointment.patient.user.name == user.name}">
+                        <div class="det-o">
                            Datetime: <i th:text="${#temporals.format(appointment.datetime, 'dd-MM-yyyy HH:mm')}"></i><br>
                             <h6>Patient</h6>
                             <i th:text="${appointment.patient.user.name}"></i>
@@ -111,8 +111,7 @@
                             <h6>Doctor</h6>
                             <i th:text="${appointment.doctor.user.name}"></i>
                             <i th:text="${appointment.doctor.user.surname}"></i><br><br>
-                            <a th:if="${user.userType == user.userType.ADMIN}"
-                               th:href="@{/appointments/delete(id=${appointment.id})}" style="color: red">Delete</a>
+                            <a th:href="@{/appointments/delete(id=${appointment.id})}" style="color: red">Delete</a>
                         </div>
                     </div>
                 </div>

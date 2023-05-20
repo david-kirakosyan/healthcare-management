@@ -7,13 +7,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
 public class SpringSecurityConfig {
 
     @Autowired
@@ -26,8 +24,9 @@ public class SpringSecurityConfig {
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/**","/user/register","/login","doctors").permitAll()
-                .requestMatchers("/appointments/delete","doctors/delete","/patients/delete","/doctors/add","/patients","/appointments").hasAuthority("ADMIN")
+                .requestMatchers("doctors/delete","/patients/delete","/doctors/add","/patients","/appointments").hasAuthority("ADMIN")
                 .requestMatchers("/appointments/add","/patients/add").hasAuthority("USER")
+                .requestMatchers("/patients/delete","/getImage", "/appointments/delete").hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin();

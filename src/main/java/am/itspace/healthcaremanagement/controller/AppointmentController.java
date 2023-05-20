@@ -41,11 +41,12 @@ public class AppointmentController {
     public String addAppointmentPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         if (currentUser != null) {
             modelMap.addAttribute("user", currentUser.getUser());
+            List<Patient> patients = PATIENT_SERVICE.allPatients();
+            List<Doctor> doctors = DOCTOR_SERVICE.allDoctors();
+            modelMap.addAttribute("patients", patients);
+            modelMap.addAttribute("doctors", doctors);
         }
-        List<Patient> patients = PATIENT_SERVICE.allPatients();
-        List<Doctor> doctors = DOCTOR_SERVICE.allDoctors();
-        modelMap.addAttribute("patients", patients);
-        modelMap.addAttribute("doctors", doctors);
+
         return "addAppointment";
     }
 
@@ -58,10 +59,8 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointments/delete")
-    public String deleteAppointments(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser.getUser().getUserType().name().equals("ADMIN")) {
-            APPOINTMENT_SERVICE.deleteAppointment(id);
-        }
+    public String deleteAppointments(@RequestParam("id") int id) {
+        APPOINTMENT_SERVICE.deleteAppointment(id);
         return "redirect:/appointments";
     }
 }
