@@ -21,10 +21,7 @@ public class UserController {
     private final UserService USER_SERVICE;
 
     @GetMapping("/register")
-    public String registerPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null){
-            modelMap.addAttribute("user", currentUser.getUser());
-        }
+    public String registerPage() {
         return "register";
     }
 

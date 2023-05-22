@@ -3,6 +3,7 @@ package am.itspace.healthcaremanagement.controller;
 import am.itspace.healthcaremanagement.entity.Appointment;
 import am.itspace.healthcaremanagement.entity.Doctor;
 import am.itspace.healthcaremanagement.entity.Patient;
+import am.itspace.healthcaremanagement.entity.type.UserType;
 import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.AppointmentService;
 import am.itspace.healthcaremanagement.service.DoctorService;
@@ -29,32 +30,29 @@ public class AppointmentController {
 
     @GetMapping("/appointments")
     public String appointmentPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null) {
-            modelMap.addAttribute("user", currentUser.getUser());
+        if (currentUser.getUser().getUserType() == UserType.ADMIN) {
+            modelMap.addAttribute("appointments", APPOINTMENT_SERVICE.allAppointments());
+        } else {
+            modelMap.addAttribute("appointments", APPOINTMENT_SERVICE.patientById(currentUser.getUser().getId()));
+
         }
-        List<Appointment> appointments = APPOINTMENT_SERVICE.allAppointments();
-        modelMap.addAttribute("appointments", appointments);
+
+
         return "appointments";
     }
 
     @GetMapping("/appointments/add")
-    public String addAppointmentPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null) {
-            modelMap.addAttribute("user", currentUser.getUser());
-            List<Patient> patients = PATIENT_SERVICE.allPatients();
-            List<Doctor> doctors = DOCTOR_SERVICE.allDoctors();
-            modelMap.addAttribute("patients", patients);
-            modelMap.addAttribute("doctors", doctors);
-        }
-
+    public String addAppointmentPage(ModelMap modelMap) {
+        List<Patient> patients = PATIENT_SERVICE.allPatients();
+        List<Doctor> doctors = DOCTOR_SERVICE.allDoctors();
+        modelMap.addAttribute("patients", patients);
+        modelMap.addAttribute("doctors", doctors);
         return "addAppointment";
     }
 
     @PostMapping("/appointments/add")
-    public String addAppointment(@ModelAttribute Appointment appointment, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser.getUser().getUserType().name().equals("USER")) {
-            APPOINTMENT_SERVICE.addAppointment(appointment);
-        }
+    public String addAppointment(@ModelAttribute Appointment appointment) {
+        APPOINTMENT_SERVICE.addAppointment(appointment);
         return "redirect:/appointments";
     }
 

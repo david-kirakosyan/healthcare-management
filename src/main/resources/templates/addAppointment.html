@@ -32,9 +32,7 @@
                     <div class="col-md-6 d-none d-lg-block cno-coll">
                         <p><i class="fas fa-mobile-alt"></i> Call Us: 0312-3-00-03</p>
                     </div>
-                    <div class="col-md-6 d-none d-lg-block cno-coll" th:if="${user != null}">
-                        <p><i th:text="${user.name}"></i> <i th:text="${user.surname}"></i></p>
-                    </div>
+                    <div class="col-md-6 d-none d-lg-block cno-coll" th:include="fragment/header::headerFragment"></div>
                 </div>
             </div>
 
@@ -54,22 +52,22 @@
                                     <a class="nav-link " href="/doctors">Doctor</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " href="/patients" th:if="${user != null}">Patient</a>
+                                    <a class="nav-link " href="/patients" th:if="${currentUser != null}">Patient</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " href="/appointments" th:if="${user != null}">Appointments</a>
+                                    <a class="nav-link " href="/appointments" th:if="${currentUser != null}">Appointments</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="/appointments/add" th:if="${user != null}"> Queue
+                                    <a class="nav-link active" href="/appointments/add" th:if="${currentUser != null}"> Queue
                                         Up Appointments</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/user/register" th:if="${user == null}">Register</a>
+                                    <a class="nav-link" href="/user/register" th:if="${currentUser == null}">Register</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/login" th:if="${user == null}">Login</a>
+                                    <a class="nav-link" href="/customLogin" th:if="${currentUser == null}">Login</a>
                                 </li>
-                                <li class="nav-item" th:if="${user != null}">
+                                <li class="nav-item" th:if="${currentUser != null}">
                                     <a class="nav-link" href="/logout"> Logout </a>
                                 </li>
                             </ul>
@@ -105,7 +103,7 @@
                         <div class="col-sm-8"><input type="datetime-local" name="datetime"
                                                      class="form-control input-sm"></div>
                     </div>
-                    <input type="hidden" name="patient.id" th:each="patient : ${patients}" th:if="${patient.user.name == user.name}"
+                    <input type="hidden" name="patient.id" th:each="patient : ${patients}" th:if="${patient.user.name == currentUser.name}"
                            th:text="${patient.user.name}" th:value="${patient.id}">
                     <br>
                     <div class="row cont-row">

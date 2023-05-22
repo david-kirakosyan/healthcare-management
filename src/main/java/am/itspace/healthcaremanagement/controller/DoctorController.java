@@ -20,10 +20,7 @@ public class DoctorController {
     private final DoctorService DOCTOR_SERVICE;
 
     @GetMapping
-    public String doctorPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null) {
-            modelMap.addAttribute("user", currentUser.getUser());
-        }
+    public String doctorPage(ModelMap modelMap) {
         List<Doctor> doctors = DOCTOR_SERVICE.allDoctors();
         modelMap.addAttribute("doctors", doctors);
         return "doctors";
@@ -33,7 +30,6 @@ public class DoctorController {
     public String addDoctorPage() {
         return "doctors";
     }
-
     @PostMapping("/add")
     public String addDoctor(@ModelAttribute Doctor doctor,
                             @RequestParam("image") MultipartFile multipartFile,

@@ -1,7 +1,6 @@
 package am.itspace.healthcaremanagement.service.impl;
 
 import am.itspace.healthcaremanagement.entity.User;
-import am.itspace.healthcaremanagement.entity.type.UserType;
 import am.itspace.healthcaremanagement.repository.UserRepository;
 import am.itspace.healthcaremanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

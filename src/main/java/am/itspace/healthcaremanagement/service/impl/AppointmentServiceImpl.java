@@ -25,6 +25,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<Appointment> patientById(int id) {
+        return appointmentRepository.findAllByPatient_id(id);
+    }
+
+    @Override
     public void deleteAppointment(int id) {
         appointmentRepository.deleteById(id);
     }

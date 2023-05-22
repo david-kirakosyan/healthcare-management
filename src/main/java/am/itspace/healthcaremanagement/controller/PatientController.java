@@ -1,6 +1,7 @@
 package am.itspace.healthcaremanagement.controller;
 
 import am.itspace.healthcaremanagement.entity.Patient;
+import am.itspace.healthcaremanagement.entity.type.UserType;
 import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.PatientService;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +23,13 @@ public class PatientController {
 
     @GetMapping("/patients")
     public String patientPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null) {
-            modelMap.addAttribute("user", currentUser.getUser());
+        List<Patient> patients;
+        if (currentUser.getUser().getUserType() == UserType.ADMIN) {
+            patients = PATIENT_SERVICE.allPatients();
+        } else {
+            patients = PATIENT_SERVICE.userById(currentUser.getUser().getId());
         }
-        List<Patient> patients = PATIENT_SERVICE.allPatients();
+
         modelMap.addAttribute("patients", patients);
         return "patients";
     }

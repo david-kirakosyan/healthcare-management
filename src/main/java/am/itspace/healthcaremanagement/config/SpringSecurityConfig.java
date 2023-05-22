@@ -29,7 +29,14 @@ public class SpringSecurityConfig {
                 .requestMatchers("/patients/delete","/getImage", "/appointments/delete").hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/customLogin")
+                .defaultSuccessUrl("/customSuccessLogin")
+                .loginProcessingUrl("/login")
+                .permitAll()
+                .and()
+                .logout().logoutSuccessUrl("/")
+                .permitAll();
         return httpSecurity.build();
     }
 

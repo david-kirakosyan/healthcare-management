@@ -10,5 +10,6 @@ public interface PatientService {
 
     void addPatient(Patient patient, CurrentUser currentUser);
 
+     List<Patient> userById(int id);
     void deletePatient(int id);
 }

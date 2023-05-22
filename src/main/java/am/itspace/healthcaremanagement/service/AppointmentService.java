@@ -9,5 +9,6 @@ public interface AppointmentService {
 
     void addAppointment(Appointment appointment);
 
+    List<Appointment> patientById(int id);
     void deleteAppointment(int id);
 }
