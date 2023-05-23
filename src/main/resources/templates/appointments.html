@@ -30,6 +30,7 @@
                              <div class="col-md-6 d-none d-lg-block cno-coll">
                                  <p><i class="fas fa-mobile-alt"></i> Call Us: 0312-3-00-03</p>
                              </div>
+<!--                            <div th:include="fragment/header::headerFragment"></div>-->
                         </div>
                     </div>
 
@@ -50,15 +51,23 @@
                                              <a class="nav-link " href="/doctors">Doctor</a>
                                          </li>
                                          <li class="nav-item">
-                                             <a class="nav-link " href="/patients">Patient</a>
+                                             <a class="nav-link " href="/patients" th:if="${currentUser != null}">Patient</a>
                                          </li>
                                          <li class="nav-item">
-                                             <a class="nav-link active" href="/appointments">Appointments</a>
+                                             <a class="nav-link active" href="/appointments" th:if="${currentUser != null}">Appointments</a>
                                          </li>
                                          <li class="nav-item">
-                                             <a class="nav-link " href="/appointments/add">Queue Up Appointments</a>
+                                             <a class="nav-link " href="/appointments/add" th:if="${currentUser != null}">Queue Up Appointments</a>
                                          </li>
-
+                                         <li class="nav-item">
+                                             <a class="nav-link" href="/user/register" th:if="${currentUser == null}">Register</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" href="/customLogin" th:if="${currentUser == null}">Login</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" href="/logout" th:if="${currentUser != null}"> Logout </a>
+                                         </li>
                                      </ul>
                                  </div>
 
@@ -95,11 +104,11 @@
                         <div class="det-o" >
                            Datetime: <i th:text="${#temporals.format(appointment.datetime, 'dd-MM-yyyy HH:mm')}"></i><br>
                             <h6>Patient</h6>
-                            <i th:text="${appointment.patient.name}"></i>
-                            <i th:text="${appointment.patient.surname}"></i><br><br>
+                            <i th:text="${appointment.patient.user.name}"></i>
+                            <i th:text="${appointment.patient.user.surname}"></i><br><br>
                             <h6>Doctor</h6>
-                            <i th:text="${appointment.doctor.name}"></i>
-                            <i th:text="${appointment.doctor.surname}"></i><br><br>
+                            <i th:text="${appointment.doctor.user.name}"></i>
+                            <i th:text="${appointment.doctor.user.surname}"></i><br><br>
                             <a th:href="@{/appointments/delete(id=${appointment.id})}" style="color: red">Delete</a>
                         </div>
                     </div>

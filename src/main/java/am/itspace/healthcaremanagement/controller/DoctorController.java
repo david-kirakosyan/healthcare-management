@@ -1,8 +1,10 @@
 package am.itspace.healthcaremanagement.controller;
 
 import am.itspace.healthcaremanagement.entity.Doctor;
+import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.DoctorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +32,10 @@ public class DoctorController {
     }
 
     @PostMapping("/add")
-    public String addDoctor(@ModelAttribute Doctor doctor, @RequestParam("image") MultipartFile multipartFile) {
-        DOCTOR_SERVICE.addDoctor(doctor, multipartFile);
+    public String addDoctor(@ModelAttribute Doctor doctor,
+                            @RequestParam("image") MultipartFile multipartFile,
+                            @AuthenticationPrincipal CurrentUser currentUser) {
+        DOCTOR_SERVICE.addDoctor(doctor, multipartFile,currentUser);
         return "redirect:/doctors";
     }
 

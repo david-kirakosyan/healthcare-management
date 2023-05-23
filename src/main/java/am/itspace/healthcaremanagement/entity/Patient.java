@@ -19,10 +19,13 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-    private  String name;
-    private  String surname;
     @Column(name = "date_of_birthday")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirthday;
+
+
+    @JoinColumn(name = "user_id")
+    @ManyToOne
+    private User user;
 
 }

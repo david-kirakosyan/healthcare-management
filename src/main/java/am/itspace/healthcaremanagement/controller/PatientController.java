@@ -1,8 +1,10 @@
 package am.itspace.healthcaremanagement.controller;
 
 import am.itspace.healthcaremanagement.entity.Patient;
+import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +33,8 @@ public class PatientController {
     }
 
     @PostMapping("/patients/add")
-    public String addPatient(@ModelAttribute Patient patient) {
-        PATIENT_SERVICE.addPatient(patient);
+    public String addPatient(@ModelAttribute Patient patient, @AuthenticationPrincipal CurrentUser currentUser) {
+        PATIENT_SERVICE.addPatient(patient,currentUser);
         return "redirect:/patients";
     }
 

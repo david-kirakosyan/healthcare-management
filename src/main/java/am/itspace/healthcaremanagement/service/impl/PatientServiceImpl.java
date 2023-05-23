@@ -2,6 +2,7 @@ package am.itspace.healthcaremanagement.service.impl;
 
 import am.itspace.healthcaremanagement.entity.Patient;
 import am.itspace.healthcaremanagement.repository.PatientRepository;
+import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void addPatient(Patient patient) {
+    public void addPatient(Patient patient, CurrentUser currentUser) {
+        patient.setUser(currentUser.getUser());
         patientRepository.save(patient);
     }
 
