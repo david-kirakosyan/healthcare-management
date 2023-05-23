@@ -1,10 +1,8 @@
 package am.itspace.healthcaremanagement.controller;
 
 import am.itspace.healthcaremanagement.entity.Doctor;
-import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.DoctorService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -30,21 +28,16 @@ public class DoctorController {
     public String addDoctorPage() {
         return "doctors";
     }
+
     @PostMapping("/add")
-    public String addDoctor(@ModelAttribute Doctor doctor,
-                            @RequestParam("image") MultipartFile multipartFile,
-                            @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser.getUser().getUserType().name().equals("ADMIN")){
-            DOCTOR_SERVICE.addDoctor(doctor, multipartFile, currentUser);
-        }
+    public String addDoctor(@ModelAttribute Doctor doctor, @RequestParam("image") MultipartFile multipartFile) {
+        DOCTOR_SERVICE.addDoctor(doctor, multipartFile);
         return "redirect:/doctors";
     }
 
     @GetMapping("/delete")
-    public String deleteDoctor(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser.getUser().getUserType().name().equals("ADMIN")){
-            DOCTOR_SERVICE.deleteDoctor(id);
-        }
+    public String deleteDoctor(@RequestParam("id") int id) {
+        DOCTOR_SERVICE.deleteDoctor(id);
         return "redirect:/doctors";
     }
 }

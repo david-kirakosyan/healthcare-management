@@ -1,11 +1,8 @@
 package am.itspace.healthcaremanagement.controller;
 
 import am.itspace.healthcaremanagement.entity.Patient;
-import am.itspace.healthcaremanagement.entity.type.UserType;
-import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.PatientService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +19,8 @@ public class PatientController {
     private final PatientService PATIENT_SERVICE;
 
     @GetMapping("/patients")
-    public String patientPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        List<Patient> patients;
-        if (currentUser.getUser().getUserType() == UserType.ADMIN) {
-            patients = PATIENT_SERVICE.allPatients();
-        } else {
-            patients = PATIENT_SERVICE.userById(currentUser.getUser().getId());
-        }
-
+    public String patientPage(ModelMap modelMap) {
+        List<Patient> patients = PATIENT_SERVICE.allPatients();
         modelMap.addAttribute("patients", patients);
         return "patients";
     }
@@ -40,17 +31,14 @@ public class PatientController {
     }
 
     @PostMapping("/patients/add")
-    public String addPatient(@ModelAttribute Patient patient,
-                             @AuthenticationPrincipal CurrentUser currentUser) {
-        PATIENT_SERVICE.addPatient(patient, currentUser);
+    public String addPatient(@ModelAttribute Patient patient) {
+        PATIENT_SERVICE.addPatient(patient);
         return "redirect:/patients";
     }
 
     @GetMapping("/patients/delete")
-    public String deletePatent(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser.getUser().getUserType().name().equals("ADMIN")) {
-            PATIENT_SERVICE.deletePatient(id);
-        }
+    public String deletePatent(@RequestParam("id") int id) {
+        PATIENT_SERVICE.deletePatient(id);
         return "redirect:/patients";
     }
 }

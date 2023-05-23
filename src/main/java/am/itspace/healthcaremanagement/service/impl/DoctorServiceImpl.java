@@ -2,7 +2,6 @@ package am.itspace.healthcaremanagement.service.impl;
 
 import am.itspace.healthcaremanagement.entity.Doctor;
 import am.itspace.healthcaremanagement.repository.DoctorRepository;
-import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.DoctorService;
 import am.itspace.healthcaremanagement.util.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +27,13 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public void addDoctor(Doctor doctor, MultipartFile multipartFile, CurrentUser currentUser) {
+    public void addDoctor(Doctor doctor, MultipartFile multipartFile) {
         try {
             String images = ImageUtil.uploadImage(multipartFile, doctorImageUploadPath);
             doctor.setProfilePic(images);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        doctor.setUser(currentUser.getUser());
         doctorRepository.save(doctor);
     }
     @Override

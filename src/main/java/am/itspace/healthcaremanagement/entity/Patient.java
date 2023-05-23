@@ -1,5 +1,6 @@
 package am.itspace.healthcaremanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,11 +19,10 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
+    private  String name;
+    private  String surname;
     @Column(name = "date_of_birthday")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirthday;
-
-    @ManyToOne
-    private User user;
 
 }
