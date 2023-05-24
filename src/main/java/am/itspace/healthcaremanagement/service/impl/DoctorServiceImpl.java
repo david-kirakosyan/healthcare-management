@@ -1,6 +1,7 @@
 package am.itspace.healthcaremanagement.service.impl;
 
 import am.itspace.healthcaremanagement.entity.Doctor;
+import am.itspace.healthcaremanagement.entity.type.UserType;
 import am.itspace.healthcaremanagement.repository.DoctorRepository;
 import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.DoctorService;
@@ -38,6 +39,7 @@ public class DoctorServiceImpl implements DoctorService {
         }
         doctorRepository.save(doctor);
     }
+
     @Override
     public void deleteDoctor(int id) {
         doctorRepository.deleteById(id);

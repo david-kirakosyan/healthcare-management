@@ -1,6 +1,7 @@
 package am.itspace.healthcaremanagement.service.impl;
 
 import am.itspace.healthcaremanagement.entity.Patient;
+import am.itspace.healthcaremanagement.entity.type.UserType;
 import am.itspace.healthcaremanagement.repository.PatientRepository;
 import am.itspace.healthcaremanagement.security.CurrentUser;
 import am.itspace.healthcaremanagement.service.PatientService;
@@ -17,8 +18,14 @@ public class PatientServiceImpl implements PatientService {
 
 
     @Override
-    public List<Patient> allPatients() {
-        return patientRepository.findAll();
+    public List<Patient> allPatients(CurrentUser currentUser) {
+        List<Patient> patients;
+        if (currentUser.getUser().getUserType() == UserType.ADMIN){
+           patients = patientRepository.findAll();
+        }else {
+            patients = patientRepository.findAllByUser_id(currentUser.getUser().getId());
+        }
+        return patients;
     }
 
     @Override

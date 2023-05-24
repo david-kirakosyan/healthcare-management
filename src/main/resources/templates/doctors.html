@@ -30,7 +30,9 @@
                              <div class="col-md-6 d-none d-lg-block cno-coll">
                                  <p><i class="fas fa-mobile-alt"></i> Call Us: 0312-3-00-03</p>
                              </div>
-<!--                            <div th:include="fragment/header::headerFragment"></div>-->
+                            <div class="col-md-6 d-none d-lg-block cno-coll">
+                                <div  th:include="../fragment/header::headerFragment"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -108,15 +110,18 @@
                             <i th:text="${doctor.user.email}"></i><br>
                             <i th:text="${doctor.specialty.name()}"></i><br>
                             tel: <i th:text="${doctor.phoneNumber}"></i><br>
-                            <a th:href="@{/doctors/delete(id=${doctor.id})}" style="color: red">Delete</a>
+                            <i th:if="${currentUser != null}">
+                                <a  th:if="${doctor.user.name == currentUser.name}"
+                                    th:href="@{/doctors/delete(id=${doctor.id})}" style="color: red">Delete</a>
+                            </i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-         <div class="row contact-rooo no-margin">
-             <div class="container">
+         <div class="row contact-rooo no-margin" th:if="${currentUser != null}">
+             <div class="container" th:if="${currentUser.userType == currentUser.userType.ADMIN}">
                  <div class="row">
                      <div style="padding:20px" class="col-sm-7">
                          <h2 >Add Doctor</h2> <br>

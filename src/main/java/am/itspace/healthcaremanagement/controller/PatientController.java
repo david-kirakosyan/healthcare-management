@@ -21,8 +21,8 @@ public class PatientController {
     private final PatientService PATIENT_SERVICE;
 
     @GetMapping("/patients")
-    public String patientPage(ModelMap modelMap) {
-        List<Patient> patients = PATIENT_SERVICE.allPatients();
+    public String patientPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<Patient> patients = PATIENT_SERVICE.allPatients(currentUser);
         modelMap.addAttribute("patients", patients);
         return "patients";
     }

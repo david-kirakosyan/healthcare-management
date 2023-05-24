@@ -1,16 +1,13 @@
 package am.itspace.healthcaremanagement.controller;
 
-import am.itspace.healthcaremanagement.entity.Doctor;
 import am.itspace.healthcaremanagement.entity.User;
-import am.itspace.healthcaremanagement.service.DoctorService;
 import am.itspace.healthcaremanagement.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
